@@ -3,8 +3,8 @@ using BepInEx.Logging;
 using HarmonyLib;
 using System;
 using System.Reflection;
-using UnityEngine.Events;
 using UnityEngine;
+using Framework;
 
 namespace YouCantFireMeIQuit;
 
@@ -45,22 +45,18 @@ public class Plugin : BaseUnityPlugin
         public static bool PauseMenuM(PauseMenu __instance)
         {
             Debug.Log("[PAUSE MENU] - OnQuitPressed");
-            UnityAction unityAction = delegate
-            {
-                Application.Quit();
-            };
             if (SingletonBehaviour<AreYouSurePanel>.HasInstance)
             {
                 __instance.pauseMenuGroup.interactable = false;
                 __instance.pauseMenuGroup.blocksRaycasts = false;
-                SingletonBehaviour<AreYouSurePanel>.Instance.SetShowing(LocalisationManager.LocaliseKey("UI_Label_Pause_QuitQuestion", null), unityAction, delegate
+                SingletonBehaviour<AreYouSurePanel>.Instance.SetShowing(LocalisationManager.LocaliseKey("UI_Label_Pause_QuitQuestion", null), delegate { Application.Quit(); }, delegate
                 {
                     __instance.pauseMenuGroup.interactable = true;
                     __instance.pauseMenuGroup.blocksRaycasts = true;
                 }, null, null, true);
                 return false;
             }
-            unityAction();
+            Application.Quit();
             return false;
         }
         [HarmonyPatch(typeof(TitleMenu))]

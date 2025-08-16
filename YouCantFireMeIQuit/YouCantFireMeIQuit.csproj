@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../sittsm-mod.props" Condition="Exists('../sittsm-mod.props')" />
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net45</TargetFramework>
     <AssemblyName>YouCantFireMeIQuit</AssemblyName>
     <Product>YouCantFireMeIQuit</Product>
     <Version>1.0.0</Version>
@@ -19,19 +20,29 @@
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
-    <PackageReference Include="UnityEngine.Modules" Version="5.6.0" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.45" IncludeAssets="compile" /> 
   </ItemGroup>
   
   <ItemGroup>
   <Reference Include="Assembly-CSharp">
-    <HintPath>C:\Users\Gorzon\Documents\GitHub\_sLib\Assembly-CSharp.dll</HintPath>
+    <HintPath>$(LibPath)\Assembly-CSharp.dll</HintPath>
   </Reference>
   <Reference Include="Assembly-CSharp-firstpass">
-    <HintPath>C:\Users\Gorzon\Documents\GitHub\_sLib\Assembly-CSharp-firstpass.dll</HintPath>
+    <HintPath>$(LibPath)\Assembly-CSharp-firstpass.dll</HintPath>
+  </Reference>
+  <Reference Include="mscorlib">
+    <HintPath>$(LibPath)\mscorlib.dll</HintPath>
   </Reference>
 </ItemGroup>
+    <!--
+    -->
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
   </ItemGroup>
+<PropertyGroup>
+    <PostBuildEvent>
+    start XCOPY /Y /R ".\bin\Debug\net45\$(ProjectName).dll" "$(GamePath)\BepInEx\Plugins\$(ProjectName).dll"
+  </PostBuildEvent>
+  </PropertyGroup>
 </Project>
