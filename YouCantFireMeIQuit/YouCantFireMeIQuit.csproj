@@ -42,7 +42,7 @@
   </ItemGroup>
 <PropertyGroup>
     <PostBuildEvent>
-    start XCOPY /Y /R ".\bin\Debug\net45\$(ProjectName).dll" "$(GamePath)\BepInEx\Plugins\$(ProjectName).dll"
+    start XCOPY /Y /R ".\bin\Debug\net45\$(AssemblyName).dll" "$(GamePath)\BepInEx\Plugins\$(AssemblyName).dll"
   </PostBuildEvent>
   </PropertyGroup>
 </Project>
