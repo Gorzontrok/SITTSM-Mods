@@ -24,7 +24,6 @@ public class Plugin : BaseUnityPlugin
     {
         // Plugin startup logic
         Logger = base.Logger;
-        Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         try
         {
             Harmony harmony = new Harmony(PluginInfo.PLUGIN_GUID);
@@ -35,6 +34,7 @@ public class Plugin : BaseUnityPlugin
         {
             Logger.LogError(ex);
         }
+        Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
     }
 
     [HarmonyPatch("OnQuitPressed")]
@@ -53,7 +53,8 @@ public class Plugin : BaseUnityPlugin
                 {
                     __instance.pauseMenuGroup.interactable = true;
                     __instance.pauseMenuGroup.blocksRaycasts = true;
-                }, null, null, true);
+                }, null, null, true, false);
+
                 return false;
             }
             Application.Quit();
