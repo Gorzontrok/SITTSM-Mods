@@ -12,7 +12,7 @@ public class PluginInfo
 {
     public const string PLUGIN_GUID = "com.gorzontrok.sittsm.youcantfiremeiquit";
     public const string PLUGIN_NAME = "You Can't Fire Me I Quit";
-    public const string PLUGIN_VERSION = "1.0.0";
+    public const string PLUGIN_VERSION = "1.1.1";
 }
 
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
