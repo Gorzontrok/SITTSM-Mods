@@ -44,7 +44,7 @@ public class Plugin : BaseUnityPlugin
         [HarmonyPrefix]
         public static bool PauseMenuM(PauseMenu __instance)
         {
-            Debug.Log("[PAUSE MENU] - OnQuitPressed");
+            Debug.Log("[PAUSE MENU] [PATCHED] - OnQuitPressed");
             if (SingletonBehaviour<AreYouSurePanel>.HasInstance)
             {
                 __instance.pauseMenuGroup.interactable = false;
@@ -64,7 +64,7 @@ public class Plugin : BaseUnityPlugin
         [HarmonyPrefix]
         public static bool TitleMenuM()
         {
-            Debug.Log("[TITLE MENU] - OnQuitPressed");
+            Debug.Log("[TITLE MENU] [PATCHED] - OnQuitPressed");
             Application.Quit();
             return false;
         }
